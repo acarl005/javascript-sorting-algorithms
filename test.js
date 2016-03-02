@@ -3,7 +3,7 @@ var algorithms = require('./sort');
 
 var RANDOM = [], SORTED = [], REVERSE = [];
 for (var i = 0; i < 30000; i++) {
-  RANDOM.push(Math.random() * 30000);
+  RANDOM.push(Math.floor(Math.random() * 30000));
   SORTED.push(i);
   REVERSE.push(30000 - 1 - i);
 }
