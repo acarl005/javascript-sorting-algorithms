@@ -10,7 +10,7 @@ function quickSort(arr) {
 
   function pickPivot(left, right) {
     if (left >= right) return;
-    var pivot = Math.ceil((left + right) / 2);
+    var pivot = Math.ceil((left + right) / 2); // pivot is arbitrarily chosen from the middle. This is least likely to be a maximum or minimum of the array, as we desire our pivot values to be somewhere in the middle
     var newPivot = partition(pivot, left, right);
     pickPivot(left, newPivot - 1);
     pickPivot(newPivot + 1, right);
@@ -19,13 +19,13 @@ function quickSort(arr) {
   function partition(pivot, left, right) {
     var storeIndex = left;
     var pivotValue = arr[pivot];
-    swap(arr, pivot, right);
+    swap(arr, pivot, right); // place pivot value at the end
     for (var i = left; i < right; i++) {
       if (arr[i] < pivotValue) {
         swap(arr, i, storeIndex++);
       }
     }
-    swap(arr, right, storeIndex);
+    swap(arr, right, storeIndex); // place pivot value to the middle where it belongs in the sorted array
     return storeIndex;
   }
 
@@ -40,7 +40,7 @@ function mergeSort(arr) {
   function split(subArr) {
     if (subArr.length < 2) return subArr;
     var mid = Math.floor(subArr.length / 2);
-    var left = split(subArr.slice(0, mid));
+    var left = split(subArr.slice(0, mid)); // recursively split until length is 1 or 0
     var right = split(subArr.slice(mid));
     return merge(left, right);
   }
@@ -113,7 +113,7 @@ function heapSort(arr) {
     maxHeap(i);
   }
 
-  function maxHeap(i) {
+  function maxHeap(i) { // ensures the value at i is the maximum of its sub-heap
     var l = 2 * i;
     var r = l + 1;
     var largest;
@@ -142,10 +142,11 @@ function heapSort(arr) {
 
 function bucketSort(arr) {
   var buckets = [];
-  for (var elem of arr) {
+  for (var elem of arr) { // use each element's value as the index for its bucket
     buckets[elem] = buckets[elem] || [];
     buckets[elem].push(elem);
   }
+  // "buckets" is now sorted
   arr.length = 0; // clear out the array elements
   for (var bucket of buckets) {
     [].push.apply(arr, bucket); // place the contents of the bucket in the array
